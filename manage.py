@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 import redis
 
@@ -8,6 +9,8 @@ import redis
 class Config(object):
     """加载配置"""
 
+    # 配置秘钥
+    SECRET_KEY = 'kg+A4s8wm9pIZkVPaEK28hA7X/SMyICHsY0QdSSZmwvNKCBW4y56r8vHXsYKs6/B'
     # 开启调试模式
     DEBUG = True
     # 配置MySQL数据库
@@ -26,9 +29,11 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 # 创建连接到redis数据库的对象
 redis_store = redis.StrictRedis(host=Config.REDIS_IP, port=Config.REDIS_PORT,)
+# 开启csrf保护
+CSRFProtect(app)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     # 测试redis数据库
     redis_store.set('name', 'sz07')
