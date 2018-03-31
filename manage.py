@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 import redis
+from flask_session import Session
 
 
 class Config(object):
@@ -21,6 +22,14 @@ class Config(object):
     # 配置Redis数据库
     REDIS_IP = '127.0.0.1'
     REDIS_PORT = 6379
+    # 配置session数据存储在Redis数据库中
+    SESSION_TYPE = 'redis'
+    # 指定存储在session数据在Redis中的位置
+    SESSION_REDIS = redis.StrictRedis(host=REDIS_IP, port=REDIS_PORT,)
+    # 开启session数据的签名，让session数据不以明文形式存储
+    SESSION_USE_SIGNER = True
+    # 设置session的会话的超时时长
+    PERMANENT_SESSION_LIFETIME = 3600 * 24
 
 
 app = Flask(__name__)
@@ -40,10 +49,16 @@ manager = Manager(app)
 Migrate(app, db)
 # 将数据库迁移脚本添加到脚本管理器
 manager.add_command('db', MigrateCommand)
+# 使用session在flask中的拓展
+Session(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
+    # 测试session：flask自带的session模块,用于存储session
+    from flask import session
+    session['name'] = 'hey python'
     # 测试redis数据库
     redis_store.set('name', 'sz07')
     return 'index'
