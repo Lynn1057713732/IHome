@@ -4,7 +4,7 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from IHome import get_app, db
-
+from IHome import models  # 在迁移之前，将模型导入一下，为了保证脚本知道模型文件的存在。没有实际的意义
 
 # 创建app
 app = get_app('development')
