@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import redis
 from flask_session import Session
 from config import configs
-from IHome.api_1_0 import api
+
 
 from IHome.utils.common import RegexConverter
 # 创建一个可以被外界导入的数据库连接对象，不传参数SQLAlchemy，不会调用init_app(app)，

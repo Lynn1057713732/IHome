@@ -15,20 +15,24 @@ function generateUUID() {
     });
     return uuid;
 }
-var imageCodeId = "";
+var uuid = "";
+var last_uuid = '';
 // 生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
 function generateImageCode() {
+    // 1.需要生成UUID
+    uuid = generateUUID();
 
-    // 上传本次图片验证码对应的uuid:唯一区分这个图片验证码是从那个浏览器发送过来的
-    var uuid = generateUUID();
+    // 2.拼接请求地址 ： url = /api/1.0/image_code?uuid=uuid
+    var url = '/api/1.0/image_code?uuid=' + uuid + '&last_uuid=' + last_uuid;
 
-    // 生成图片验证码对应的<img>标签的url
-    var url = '/api/1.0/image_code?uuid=' + uuid;
-
-    // 将url的值赋值给<img>标签的属性
+    // 3.将url赋值给<img>标签的src属性
+    // $('.image-code>img') : 表示从image-code标识的标签中直接找到子集<img>
+    // $('.image-code img') : 表示从image-code标识的标签中找子集，如果子集没有，就去子集的子集中找
     $('.image-code>img').attr('src', url);
-}
 
+    // 当前的uuid使用完成后，立即记录，下次再进入时，之前保存到last_uuid里面就是上次的uuid
+    last_uuid = uuid;
+}
 function sendSMSCode() {
     // 校验参数，保证输入框有数据填写
     $(".phonecode-a").removeAttr("onclick");
