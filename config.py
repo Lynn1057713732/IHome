@@ -10,7 +10,7 @@ class Config(object):
     # 开启调试模式
     DEBUG = True
     # 配置MySQL数据库
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:1057713732@127.0.0.1:3306/ihome_dubug'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:1057713732@127.0.0.1:3306/ihome_debug'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # 配置Redis数据库
     REDIS_IP = '127.0.0.1'
