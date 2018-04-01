@@ -6,6 +6,8 @@ import redis
 from flask_session import Session
 from config import configs
 from IHome.api_1_0 import api
+
+from IHome.utils.common import RegexConverter
 # 创建一个可以被外界导入的数据库连接对象，不传参数SQLAlchemy，不会调用init_app(app)，
 # 就没有db对象，在自己用到时自己调用init_app(app)，创建db对象
 db = SQLAlchemy()
@@ -28,9 +30,15 @@ def get_app(config_name):
     CSRFProtect(app)
     # 使用session在flask中的拓展
     Session(app)
-    # 在将蓝图注册到app中
+
+    # 需要现有路由转换器，后面你的html_blue才能直接正则匹配
+    app.url_map.converters['re'] = RegexConverter
+
+    # 注册蓝图：为了解决导入api时，还没有redis_store，造成的ImportError: cannot import name redis_store
     from IHome.api_1_0 import api
     app.register_blueprint(api)
-
+    # 注册静态html文件加载时的蓝图
+    from IHome.web_html import html_bule
+    app.register_blueprint(html_bule)
 
     return app
