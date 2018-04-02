@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
-from flask import Blueprint, current_app
+from flask import Blueprint, current_app, make_response
+from flask_wtf.csrf import generate_csrf
 
 
 html_bule = Blueprint('html/blue', __name__)
@@ -18,5 +19,11 @@ def get_static_html(file_name):
     if file_name != 'favicon.ico':
         # 2.拼接file_name静态文件的路径
         file_name = 'html/' + file_name
+    # 获取response
+    response = make_response(current_app.send_static_file(file_name))
 
-    return current_app.send_static_file(file_name)
+    token = generate_csrf()
+    # csrf_token数据写入到cookie
+    response.set_cookie('csrf_token', token)
+
+    return response

@@ -66,6 +66,7 @@ function sendSMSCode() {
         type:'post',
         data: JSON.stringify(params),       //将其他对象快速转化为json格式
         contentType : 'application/json',  //告诉服务器发送的市JSON数据
+        headers:{'X-CSRFToken':getCookie('csrf_token')}, // 读取的当前页面终端额csrf_token信息发给服务器
         success:function (response) {
             if (response.errno == 0){
                 //发送短信验证码成功
@@ -120,4 +121,59 @@ $(document).ready(function() {
     });
 
     // TODO: 注册的提交(判断参数是否为空)
-})
+    $('.form-register').submit(function (event) {
+        // 阻止form表单自己的提交时间
+        event.preventDefault();
+
+        // 读取要发送给服务器的变量：手机号，短信验证码，密码，确认密码
+        var mobile = $('#mobile').val();
+        var phonecode = $('#phonecode').val();
+        var password = $('#password').val();
+        var password2 = $('#password2').val();
+
+        // 校验变量是否存在
+        if (!mobile) {
+            $("#mobile-err span").html("请填写正确的手机号！");
+            $("#mobile-err").show();
+            return;
+        }
+        if (!phonecode) {
+            $('#phone-code-err span').html('请填写短信验证码');
+            $('#phone-code-err').show();
+            return;
+        }
+        if (!password) {
+            $("#password-err span").html("请填写密码!");
+            $("#password-err").show();
+            return;
+        }
+        if (password != password2) {
+            $("#password2-err span").html("两次密码不一致!");
+            $("#password2-err").show();
+            return;
+        }
+        // 准备c参数
+        var params = {
+            'mobile':mobile,
+            'sms_code':phonecode,
+            'password':password
+        };
+        // 发送注册请求给服务器
+        $.ajax({
+            url:'/api/1.0/users',
+            type:'post',
+            data:JSON.stringify(params),
+            contentType:'application/json',
+            headers:{'X-CSRFToken':getCookie('csrf_token')},
+            success:function (response) {
+                if (response.errno == '0') {
+                    // 如果注册成功，进入到主页
+                    location.href = '/'
+                } else {
+                    alert(response.errmsg);
+                }
+            }
+        });
+    });
+
+});
