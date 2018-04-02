@@ -35,11 +35,14 @@ function generateImageCode() {
 }
 function sendSMSCode() {
     // 校验参数，保证输入框有数据填写
+    //避免暴力的获取的短信验证码，一旦点击后就也出点击的点击属性
     $(".phonecode-a").removeAttr("onclick");
     var mobile = $("#mobile").val();
     if (!mobile) {
+        //提示错误信息
         $("#mobile-err span").html("请填写正确的手机号！");
         $("#mobile-err").show();
+        //如果有错再一次添加点击事件，为了用户修改错误后再次点击可以成功获取验证码
         $(".phonecode-a").attr("onclick", "sendSMSCode();");
         return;
     } 
@@ -52,6 +55,49 @@ function sendSMSCode() {
     }
 
     // TODO: 通过ajax方式向后端接口发送请求，让后端发送短信验证码
+    //要发送给服务端的数据
+    var params = {
+        'mobile': mobile,
+        'imageCode': imageCode,
+        'uuid': uuid
+    }
+    $.ajax({
+        url:'/api/1.0/sms_code',
+        type:'post',
+        data: JSON.stringify(params),       //将其他对象快速转化为json格式
+        contentType : 'application/json',  //告诉服务器发送的市JSON数据
+        success:function (response) {
+            if (response.errno == 0){
+                //发送短信验证码成功
+                // 发送成功后，进行倒计时
+                var num = 60;
+                var t = setInterval(function ()  {
+                    if (num == 0) {
+                        // 倒计时完成,清除定时器
+                        clearInterval(t);
+                        // 重置内容
+                        $(".phonecode-a").html('获取验证码');
+                        // 重新添加点击事件
+                        $(".phonecode-a").attr("onclick", "sendSMSCode();");
+                    } else {
+                        // 正在倒计时，显示秒数
+                        $(".phonecode-a").html(num + '秒');
+                    }
+
+                    num = num - 1;
+                }, 1000);
+            }
+            else{
+                //发送短短信验证码失败
+                //重新添加点击事件
+                $(".phonecode-a").attr("onclick", "sendSMSCode();");
+                //重新生成验证码
+                generateImageCode();
+                //弹出错误消息
+                alert(response.errmsg)
+            }
+        }
+    });
 }
 
 $(document).ready(function() {
