@@ -58,3 +58,22 @@ INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IH
 INFO _internal.py:87  * Restarting with stat
 WARNING _internal.py:87  * Debugger is active!
 INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87 127.0.0.1 - - [02/Apr/2018 09:53:54] "GET /register.html HTTP/1.1" 304 -
+DEBUG verify.py:33 图片验证码的文字信息:IFKK
+INFO _internal.py:87 127.0.0.1 - - [02/Apr/2018 09:53:55] "GET /api/1.0/image_code?uuid=44327f06-8656-4436-bd0a-469b2852e280&last_uuid= HTTP/1.1" 200 -
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/verify.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+DEBUG verify.py:33 图片验证码的文字信息:LO9D
+INFO _internal.py:87 127.0.0.1 - - [02/Apr/2018 09:54:33] "GET /api/1.0/image_code?uuid=f773ce7e-1740-4458-a7e5-729660bfc5e3&last_uuid=44327f06-8656-4436-bd0a-469b2852e280 HTTP/1.1" 200 -
+INFO _internal.py:87  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+DEBUG verify.py:33 图片验证码的文字信息:LTQI
+INFO _internal.py:87 127.0.0.1 - - [02/Apr/2018 15:36:32] "GET /api/1.0/image_code?uuid=717f39af-bc9f-4b35-bc7b-2fe239d7bb7d&last_uuid= HTTP/1.1" 200 -

@@ -30,8 +30,7 @@ def get_image_code():
     # 2.生成验证码:text是验证码的文字信息，image验证码的图片信息
     name, text, image = captcha.generate_captcha()
     # logging.debug(text)
-    current_app.logger.debug(text)
-
+    current_app.logger.debug(u'图片验证码的文字信息:' + text)
     # 3.使用UUID存储图片验证码内容到redis
     try:
         if last_uuid:
