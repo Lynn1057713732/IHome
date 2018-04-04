@@ -842,3 +842,7 @@ INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 23:32:26] "GET /static/js/templa
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 23:32:26] "GET /static/js/ihome/index.js HTTP/1.1" 200 -
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 23:32:26] "GET /static/images/logo@128x59.png HTTP/1.1" 200 -
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 23:32:39] "GET /api/1.0/users HTTP/1.1" 200 -
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/utils/common.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754

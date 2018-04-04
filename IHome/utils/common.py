@@ -19,6 +19,8 @@ class RegexConverter(BaseConverter):
 def login_required(view_func):
     """校验用户是否是登录用户"""
 
+    # 装饰器装饰一个函数时，会修改该函数的__name__属性
+    # 如果希望装饰器装饰之后的函数，依然保留原始的名字和说明文档,就需要使用wraps装饰器，装饰内存函数
     @wraps(view_func)
     def wrapper(*args, **kwargs):
         # 获取用户的user_id
