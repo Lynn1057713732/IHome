@@ -10,6 +10,52 @@ from IHome.utils.image_storage import upload_image
 from IHome import db, constants
 
 
+@api.route('/users/name', methods=['PUT'])
+def set_user_name():
+    """修改用户名
+    0.先判断用户是否登录 @login_required
+    1.接受用户传入的新名字， new_name
+    2.判断参数是否为空
+    3.查询当前登录用户
+    4.将new_name赋值给当前的登录用户的name属性
+    5.将新的数据写入到数据库
+    6.响应结果
+    """
+
+    # 1.接受用户传入的新名字， new_name
+    json_dict = request.json
+    new_name = json_dict.get('name')
+
+    # 2.判断参数是否为空
+    if not new_name:
+        return jsonify(errno=RET.PARAMERR, errmsg='缺少参数')
+
+    # 3.查询当前登录用户
+    user_id = session.get('user_id')
+
+    try:
+        user = User.query.get(user_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg='查询用户数据失败')
+    if not user:
+        return jsonify(errno=RET.NODATA, errmsg='用户不存在')
+
+    # 4.将new_name赋值给当前的登录用户的name属性
+    user.name = new_name
+
+    # 5.将新的数据写入到数据库
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg='存储用户名失败')
+
+    # 6.响应结果
+    return jsonify(errno=RET.OK, errmsg='修改用户名成功')
+
+
 @api.route('/users/avatar', methods=['POST'])
 def upload_avatar():
     """提供用户头像上传
