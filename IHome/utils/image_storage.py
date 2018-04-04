@@ -33,6 +33,6 @@ def upload_image(image_data):
 
 
 if __name__ == '__main__':
-    path = '/Users/sheep-yang/Desktop/Images/mm03.jpeg'
+    path = '/Users/sheep-yang/Desktop/Images/mm02.jpg'
     with open(path, 'rb') as file:
         upload_image(file.read())
