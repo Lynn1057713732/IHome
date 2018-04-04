@@ -8,9 +8,11 @@ from IHome.models import User
 from IHome.utils.response_code import RET
 from IHome.utils.image_storage import upload_image
 from IHome import db, constants
+from IHome.utils.common import login_required
 
 
 @api.route('/users/name', methods=['PUT'])
+@login_required
 def set_user_name():
     """修改用户名
     0.先判断用户是否登录 @login_required
@@ -31,8 +33,8 @@ def set_user_name():
         return jsonify(errno=RET.PARAMERR, errmsg='缺少参数')
 
     # 3.查询当前登录用户
-    user_id = session.get('user_id')
-
+    # user_id = session.get('user_id')
+    user_id = g.user_id
     try:
         user = User.query.get(user_id)
     except Exception as e:
@@ -57,6 +59,7 @@ def set_user_name():
 
 
 @api.route('/users/avatar', methods=['POST'])
+@login_required
 def upload_avatar():
     """提供用户头像上传
     0.先判断用户是否登录 @login_required
@@ -82,8 +85,8 @@ def upload_avatar():
 
     # 3.存储图片的key到user.avatar_url属性中
     # 获取登录用户的user_id
-    user_id = session.get('user_id')
-
+    # user_id = session.get('user_id')
+    user_id = g.user_id
 
     # 查询登录用户对象
     try:
@@ -111,11 +114,13 @@ def upload_avatar():
 
 
 @api.route('/users')
-def get_user():
+@login_required
+def get_user_info():
     """提供用户个人信息"""
     # 0.判断用户是否登录
     # 1.获取用户id (user_id),通过session
-    user_id = session.get('user_id')
+    # user_id = session.get('user_id')
+    user_id = g.user_id
 
     # 2.查询该登录用户的user信息
     try:
