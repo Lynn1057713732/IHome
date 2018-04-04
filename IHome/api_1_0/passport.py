@@ -45,7 +45,6 @@ def login():
     return jsonify(errno=RET.OK, errmsg="登陆成功")
 
 
-
 @api.route('/users', methods=['POST'])
 def register():
     """实现注册
@@ -86,6 +85,10 @@ def register():
     if sms_code_server != sms_code_client:
         return jsonify(errno=RET.DATAERR, errmsg='输入验证码有误')
 
+    # 判断用户是否已经注册
+    if User.query.filter(User.mobile == mobile).first():
+        return jsonify(errno=RET.DATAEXIST, errmsg="用户已注册")
+
     # 5.创建User模型类对象
     user = User()
     # 注册时，默认手机号就是用户名，如果后面需要更换用户名，也是提供的有接口和界面
@@ -104,6 +107,10 @@ def register():
         db.session.rollback()
         return jsonify(errno=RET.DBERR, errmsg='保存注册数据失败')
 
+    # 实现用户注册成功即登录：记住状态保存信息
+    session['user_id'] = user.id
+    session['name'] = user.name
+    session['mobile'] = user.mobile
     # 7.响应结果
     return jsonify(errno=RET.OK, errmsg='注册成功')
 

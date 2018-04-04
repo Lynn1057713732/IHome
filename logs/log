@@ -451,3 +451,24 @@ INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:27:13] "GET /static/plugins/b
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:27:13] "GET /static/js/template.js HTTP/1.1" 200 -
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:27:13] "GET /static/js/ihome/index.js HTTP/1.1" 200 -
 INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:27:13] "GET /static/plugins/swiper/js/maps/swiper.jquery.min.js.map HTTP/1.1" 404 -
+INFO _internal.py:87  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:03] "GET /register.html HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:03] "GET /static/css/ihome/register.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:03] "GET /static/js/ihome/register.js?v=4 HTTP/1.1" 200 -
+DEBUG verify.py:94 图片验证码的文字信息:JDRW
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:04] "GET /api/1.0/image_code?uuid=6980152e-d167-4bd5-bdfb-3b7b44c84fb5&last_uuid= HTTP/1.1" 200 -
+DEBUG verify.py:60 短信验证码为：145093
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:28] "POST /api/1.0/sms_code HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:32:42] "POST /api/1.0/users HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:33:24] "POST /api/1.0/users HTTP/1.1" 200 -
+DEBUG verify.py:94 图片验证码的文字信息:HPI8
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:33:31] "GET /api/1.0/image_code?uuid=7a4ca0fb-2d07-454c-b3da-c2bad706a941&last_uuid=6980152e-d167-4bd5-bdfb-3b7b44c84fb5 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:33:40] "POST /api/1.0/sms_code HTTP/1.1" 200 -
+DEBUG verify.py:94 图片验证码的文字信息:9YHN
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:33:41] "GET /api/1.0/image_code?uuid=5435e91b-1023-4cf6-aa68-039da96b68bb&last_uuid=7a4ca0fb-2d07-454c-b3da-c2bad706a941 HTTP/1.1" 200 -
+DEBUG verify.py:60 短信验证码为：392842
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:33:48] "POST /api/1.0/sms_code HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [04/Apr/2018 19:34:06] "POST /api/1.0/users HTTP/1.1" 200 -
