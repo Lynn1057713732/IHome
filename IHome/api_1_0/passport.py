@@ -3,11 +3,47 @@
 
 
 from . import api
-from flask import request,jsonify, current_app
-import json
+from flask import request, jsonify, current_app,session
+import re
 from IHome.utils.response_code import RET
 from IHome import redis_store, db
 from IHome.models import User
+
+
+@api.route('/sessions', methods=['POST'])
+def login():
+    """实现登录"""
+
+    # 1.接受请求参数：手机号，密码明文密码
+    json_dict = request.json
+    mobile = json_dict.get('mobile')
+    password = json_dict.get('password')
+    current_app.logger.debug(mobile)
+    # 2.判断参数的完整性
+    if not all([mobile, password]):
+        return jsonify(errno=RET.PARAMERR, errmsg="缺少参数")
+    # 对手机号码进行校验
+    if not re.match(r'^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$', mobile):
+        return jsonify(errno=RET.PARAMERR, errmsg=u'手机号码格式错误')
+    # 3.使用手机号查询要登录用户的模型数据
+    try:
+        user = User.query.filter(User.mobile == mobile).first()
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="查询用户数据库失败 ")
+    # 用户查询出来为None,那么不会返回错误，但是实际中需要判断
+    if not user:
+        return jsonify(errno=RET.USERERR, errmsg="用户名或密码错误")
+    # 4.对密码进行校验
+    if not user.check_password(password):
+        return jsonify(errno=RET.PWDERR, errmsg="用户名或密码错误")
+    # 5.将用户的校验信息写入session
+    session['user_id'] = user.id
+    session['name'] = user.name
+    session['mobile'] = user.mobile
+    # 6.响应登录结果
+    return jsonify(errno=RET.OK, errmsg="登陆成功")
+
 
 
 @api.route('/users', methods=['POST'])

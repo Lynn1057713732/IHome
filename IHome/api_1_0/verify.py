@@ -100,7 +100,7 @@ def get_image_code():
         # 保存本次需要记录的验证码数据
         redis_store.set('ImageCode:' + uuid, text, constants.IMAGE_CODE_REDIS_EXPIRES)
     except Exception as e:
-        current_app.logger.debug(e)
+        current_app.logger.error(e)
         return jsonify(errno=RET.DBERR, errmsg='保存验证码失败')
 
     # 4.返回图片验证码

@@ -38,6 +38,13 @@ class User(BaseModel, db.Model):
         # value 是外界传入的密码的明文数据
         self.password_hash = generate_password_hash(value)
 
+    def check_password(self, password):
+        """封装了登录密码的校验"""
+        # 对用户输入的密码明文与数据库中加密后的密码密文比较，成功赶回True
+        return check_password_hash(self.password_hash, password)
+
+
+
 
 class Area(BaseModel, db.Model):
     """城区"""
