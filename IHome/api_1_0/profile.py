@@ -11,6 +11,55 @@ from IHome import db, constants
 from IHome.utils.common import login_required
 
 
+@api.route('/users/auth', methods=['POST'])
+@login_required
+def set_user_auth():
+    """提供用户实名认证
+    0.判断用户是否是登录用户 @login_required
+    1.接受参数：real_name , id_card
+    2.判断参数是否缺少：这里就不对身份证进行格式的校验，省略掉
+    3.查询当前的登录用户模型对象
+    4.将real_name , id_card赋值给用户模型对象
+    5.将新的数据写入到数据库
+    6.响应结果
+    """
+
+    # 1.接受参数：real_name , id_card
+    json_dict = request.json
+    real_name = json_dict.get('real_name')
+    id_card = json_dict.get('id_card')
+
+    # 2.判断参数是否缺少：这里就不对身份证进行格式的校验，省略掉
+    if not all([real_name, id_card]):
+        return jsonify(errno=RET.PARAMERR, errmsg='缺少参数')
+
+    # 3.查询当前的登录用户模型对象
+    user_id = g.user_id
+    try:
+        user = User.query.get(user_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg='查询用户数据失败')
+    if not user:
+        return jsonify(errno=RET.NODATA, errmsg='用户不存在')
+
+    # 4.将real_name , id_card赋值给用户模型对象
+    user.real_name = real_name
+    user.id_card = id_card
+
+    # 5.将新的数据写入到数据库
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg='保存实名认证数据失败')
+
+    # 6.响应结果
+    return jsonify(errno=RET.OK, errmsg='实名认证成功')
+
+
+
 @api.route('/users/name', methods=['PUT'])
 @login_required
 def set_user_name():
