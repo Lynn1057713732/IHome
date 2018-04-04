@@ -3,7 +3,7 @@
 
 
 from . import api
-from flask import request, session, current_app, jsonify
+from flask import request, session, current_app, jsonify, g
 from IHome.models import User
 from IHome.utils.response_code import RET
 from IHome.utils.image_storage import upload_image
