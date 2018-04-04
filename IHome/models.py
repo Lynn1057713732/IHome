@@ -43,6 +43,16 @@ class User(BaseModel, db.Model):
         # 对用户输入的密码明文与数据库中加密后的密码密文比较，成功赶回True
         return check_password_hash(self.password_hash, password)
 
+    def to_dict(self):
+        """封装要响应的字典"""
+        response_data = {
+            'avatar_url': constants.QINIU_DOMIN_PREFIX + (self.avatar_url if self.avatar_url else ""),
+            'name': self.name,
+            'mobile': self.mobile,
+            'user_id': self.id
+        }
+        return response_data
+
 
 
 
