@@ -1128,3 +1128,85 @@ INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IH
 INFO _internal.py:87  * Restarting with stat
 WARNING _internal.py:87  * Debugger is active!
 INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/houses.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/houses.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/houses.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/houses.py', reloading
+INFO _internal.py:87  * Restarting with stat
+INFO _internal.py:87  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET / HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET /static/plugins/swiper/css/swiper.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET /static/css/ihome/index.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET /static/plugins/swiper/js/swiper.jquery.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET /static/js/ihome/index.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:27] "GET /static/images/logo@128x59.png HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:34:39] "GET /api/1.0/areas HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:35:58] "GET /newhouse.html?title=%E5%A6%82%E5%AE%B6&price=199&area_id=3&address=%E7%8E%8B%E5%BA%9C%E5%A4%A7%E9%81%9328%E5%8F%B7&room_count=1&acreage=40&unit=%E5%88%AB%E5%A2%85&capacity=2&beds=%E5%8F%8C%E4%BA%BA%E5%BA%8Ax1&deposit=200&min_days=1&max_days=3&facility=1&facility=2&facility=3&facility=12&facility=15&facility=19&facility=20&facility=22&facility=23 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:35:59] "GET /api/1.0/areas HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:39:47] "GET /newhouse.html?title=1&price=1&area_id=1&address=1&room_count=1&acreage=1&unit=1&capacity=1&beds=1&deposit=1&min_days=1&max_days=1&facility=1&facility=3&facility=5 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:39:47] "GET /api/1.0/areas HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:40:32] "GET /api/1.0/areas HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /newhouse.html?title=1&price=1&area_id=1&address=1&room_count=1&acreage=1&unit=1&capacity=1&beds=1&deposit=1&min_days=1&max_days=1&facility=1&facility=3&facility=5 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/css/ihome/main.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/css/ihome/newhouse.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/js/jquery.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/js/jquery.form.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/js/template.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:39] "GET /static/plugins/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:40] "GET /static/js/ihome/newhouse.js?v=3 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:40] "GET /static/plugins/bootstrap/css/bootstrap.min.css.map HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:41:40] "GET /api/1.0/areas HTTP/1.1" 200 -
+INFO _internal.py:87  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:44:37] "GET /newhouse.html HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:44:37] "GET /api/1.0/areas HTTP/1.1" 200 -
+DEBUG houses.py:25 111
+DEBUG houses.py:45 222
+DEBUG houses.py:73 333
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:45:01] "POST /api/1.0/houses HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /newhouse.html HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/css/ihome/main.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/css/ihome/newhouse.css HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/js/jquery.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/js/jquery.form.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/js/template.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/js/ihome/newhouse.js?v=3 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /static/plugins/bootstrap/css/bootstrap.min.css.map HTTP/1.1" 200 -
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:26] "GET /api/1.0/areas HTTP/1.1" 200 -
+DEBUG houses.py:25 111
+DEBUG houses.py:45 222
+DEBUG houses.py:73 333
+INFO _internal.py:87 127.0.0.1 - - [06/Apr/2018 17:46:44] "POST /api/1.0/houses HTTP/1.1" 200 -
+INFO _internal.py:87  * Detected change in '/Users/sheep-yang/PycharmProjects/IHome/IHome/api_1_0/houses.py', reloading
+INFO _internal.py:87  * Restarting with stat
+WARNING _internal.py:87  * Debugger is active!
+INFO _internal.py:87  * Debugger PIN: 209-808-754
