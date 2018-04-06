@@ -196,6 +196,14 @@ def get_areas():
     2.构造响应信息
     3.响应结果
     """
+    # 查询缓存数据，如果有缓存数据，就使用缓存数据，反之，就查询，并缓存新查询的数据
+    try:
+        area_dict_list = redis_store.get('Areas')
+        if area_dict_list:
+            return jsonify(errno=RET.OK, errmsg='OK', data=eval(area_dict_list))
+    except Exception as e:
+        current_app.logger.error(e)
+
     # 1.查询所有城区信息,如果为空，就不显示任何信息。
     # areas返回的数据时模型对象列表[area1,area2,area3...]
     try:
@@ -208,6 +216,14 @@ def get_areas():
     area_dict_list = []
     for area in areas:
         area_dict_list.append(area.to_dict())
+
+    # 缓存城区信息到redis : 没有缓存成功也没有影响，因为前面会判断和查询
+    try:
+        redis_store.set('Areas', area_dict_list, constants.AREA_INFO_REDIS_EXPIRES)
+    except Exception as e:
+        current_app.logger.error(e)
+
+
     # 3.响应结果
     return jsonify(errno=RET.OK, errmsg="NOT OK", data=area_dict_list)
 
