@@ -11,6 +11,31 @@ from IHome import db, constants
 from IHome.utils.common import login_required
 
 
+@api.route('/users/auth', methods=['GET'])
+@login_required
+def get_user_auth():
+    """查询用户实名认证情况
+    0.判断用户是否登录
+    1.获取user_id,查询user信息
+    2.构造响应数据
+    3.响应结果
+    """
+    # 1.获取user_id, 查询user信息
+    user_id = g.user_id
+    try:
+        user = User.query.get(user_id)
+    except Exception as e :
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="查询用户数据失败")
+    if not user:
+        return jsonify(errno=RET.NODATA, errmsg="用户不存在")
+    # 2.构造响应数据
+    response_data = user.auth_to_dict()
+
+    # 3.响应结果
+    return jsonify(errno=RET.OK, errmsg="OK", data=response_data)
+
+
 @api.route('/users/auth', methods=['POST'])
 @login_required
 def set_user_auth():
