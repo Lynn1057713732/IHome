@@ -127,6 +127,8 @@ def set_user_name():
         current_app.logger.error(e)
         db.session.rollback()
         return jsonify(errno=RET.DBERR, errmsg='存储用户名失败')
+    # 修改名字时，也需要将session中的name修改
+    session['name'] = new_name
 
     # 6.响应结果
     return jsonify(errno=RET.OK, errmsg='修改用户名成功')
