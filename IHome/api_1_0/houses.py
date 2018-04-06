@@ -223,7 +223,6 @@ def get_areas():
     except Exception as e:
         current_app.logger.error(e)
 
-
     # 3.响应结果
     return jsonify(errno=RET.OK, errmsg="NOT OK", data=area_dict_list)
 

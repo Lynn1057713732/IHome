@@ -56,6 +56,17 @@ function goToSearchPage(th) {
     url += ("ed=" + $(th).attr("end-date"));
     location.href = url;
 }
+function swiper() {
+    // TODO: 数据设置完毕后,需要设置幻灯片对象，开启幻灯片滚动
+    var mySwiper = new Swiper ('.swiper-container', {
+        loop: true,
+        autoplay: 2000,
+        autoplayDisableOnInteraction: false,
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+    });
+    
+}
 
 $(document).ready(function(){
     // TODO: 检查用户的登录状态
@@ -78,6 +89,9 @@ $(document).ready(function(){
         }
     });
     // $(".top-bar>.register-login").show();
+    
+
+
     // TODO: 获取幻灯片要展示的房屋基本信息
       $.get('/api/1.0/houses/index', function (response) {
         if (response.errno == '0') {
@@ -88,16 +102,6 @@ $(document).ready(function(){
             alert(response.errmsg);
         }
     });
-
-    // TODO: 数据设置完毕后,需要设置幻灯片对象，开启幻灯片滚动
-    var mySwiper = new Swiper ('.swiper-container', {
-        loop: true,
-        autoplay: 2000,
-        autoplayDisableOnInteraction: false,
-        pagination: '.swiper-pagination',
-        paginationClickable: true
-    });
-
     // TODO: 获取城区信息,获取完毕之后需要设置城区按钮点击之后相关操作
  $.get('/api/1.0/areas', function (response) {
         if (response.errno == '0') {
