@@ -55,6 +55,12 @@ $(document).ready(function(){
             headers:{'X-CSRFToken':getCookie('csrf_token')},
             success:function (response) {
                 if(response.errno == '0'){
+                    // 需求:发布房屋基本信息成功。需要展示发布房屋图片的界面
+                    // 隐藏发布基本信息表单。展示发布房屋图片的表单
+                    $('#form-house-info').hide();
+                    $('#form-house-image').show();
+                    // 将后端生成的house_id传入到上传图片的<input>
+                    $('#house-id').val(response.data.house_id);
 
                 }
                 else if (response.errno == '4101') {
@@ -67,5 +73,22 @@ $(document).ready(function(){
         })
     })
     // TODO: 处理图片表单的数据
+        $('#form-house-image').submit(function (event) {
+            event.preventDefault();
 
-})
+            $(this).ajaxSubmit({
+                url:'/api/1.0/houses/image',
+                type:'post',
+                headers:{'X-CSRFToken':getCookie('csrf_token')},
+                success:function (response) {
+                    if (response.errno == '0') {
+                        $('.house-image-cons').append('<img src="'+response.data.image_url+'">');
+                    } else if (response.errno == '4101')  {
+                        location.href = '/';
+                    } else {
+                        alert(response.errmsg);
+                    }
+                }
+            });
+        });
+});

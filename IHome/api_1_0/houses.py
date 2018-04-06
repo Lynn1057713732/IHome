@@ -4,9 +4,68 @@
 from . import api
 from flask import current_app, jsonify, request, g, session
 from IHome.utils.response_code import RET
-from IHome.models import Area, House, Facility
+from IHome.models import Area, House, Facility, HouseImage
 from IHome import db, constants, redis_store
 from IHome.utils.common import login_required
+from IHome.utils.image_storage import upload_image
+
+@api.route('/houses/image', methods=['POST'])
+@login_required
+def upload_house_image():
+    """发布房屋图片
+    0.判断用户是否登录
+    1.接受参数：house_id,image_data
+    2.校验参数
+    3.查询house模型对象数据，没有数据就不用上传
+    4.调用上传图片的方法，上传图片到七牛云
+    5.将图片上的七牛云key，保存到数据库
+    6.响应结果：上传的房屋图片，需要立即刷新出来
+    """
+    # 1.接受参数：house_id,image_data，校验参数
+    try:
+        image_data = request.files.get('house_image')
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="无法收到房屋图片")
+    try:
+        house_id = request.form.get('house_id')
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.PARAMERR, errmsg="缺少必要参数")
+    # 3.查询house模型对象数据，没有数据就不用上传
+    try:
+        house = House.query.get(house_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg="查询房屋数据失败")
+    if not house:
+        return jsonify(errno=RET.NODATA, errmsg="房屋不存在")
+    # 4.调用上传图片的方法，上传图片到七牛云
+    try:
+        key = upload_image(image_data)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.THIRDERR, errmsg='上传房屋图片失败')
+
+    # 5.将图片上的七牛云key，保存到数据库
+    house_image = HouseImage()
+    house_image.house_id = house_id
+    house_image.url = key
+
+    # 选择一个图片，作为房屋的默认图片
+    if not house.index_image_url:
+        house.index_image_url = key
+    try:
+        db.session.add(house_image)
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg='存储房屋图片失败')
+
+    # 6.响应结果：上传的房屋图片，需要立即刷新出来
+    image_url = constants.QINIU_DOMIN_PREFIX + key
+    return jsonify(errno=RET.OK, errmsg='发布房屋图片成功', data={'image_url': image_url})
 
 
 @api.route('/houses', methods=['POST'])
@@ -69,13 +128,13 @@ def pub_house():
     # 查询出被选中的设置模型对象，赋值给房子的模型属性
     house.facilities = Facility.query.filter(Facility.id.in_(facilities)).all()
     # 4.保存到数据库
-    # try:
-    #     db.session.add(house)
-    #     db.session.commit()
-    # except Exception as e:
-    #     current_app.logger.error(e)
-    #     db.session.rollback()
-    #     return jsonify(errno=RET.DBERR, errmsg="发布新房源失败")
+    try:
+        db.session.add(house)
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+        return jsonify(errno=RET.DBERR, errmsg="发布新房源失败")
     # 5.响应结果
     return jsonify(errno=RET.OK, errmsg="发布新房源成功", data={'house_id':house.id})
 
