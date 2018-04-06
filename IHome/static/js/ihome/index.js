@@ -79,6 +79,15 @@ $(document).ready(function(){
     });
     // $(".top-bar>.register-login").show();
     // TODO: 获取幻灯片要展示的房屋基本信息
+      $.get('/api/1.0/houses/index', function (response) {
+        if (response.errno == '0') {
+            var html = template('swiper-houses-tmpl', {'houses':response.data});
+            $('.swiper-wrapper').html(html);
+            swiper();
+        } else {
+            alert(response.errmsg);
+        }
+    });
 
     // TODO: 数据设置完毕后,需要设置幻灯片对象，开启幻灯片滚动
     var mySwiper = new Swiper ('.swiper-container', {
