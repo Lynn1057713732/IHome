@@ -9,6 +9,34 @@ from IHome import db, constants, redis_store
 from IHome.utils.common import login_required
 from IHome.utils.image_storage import upload_image
 
+
+@api.route('/houses/detail/<int:house_id>')
+def get_house_detail(house_id):
+    """房源详细信息
+    0.获取house_id,通过正则。如果house_id不满足条件不会进入到使用当中
+    1.查询房屋全部信息
+    2.构造响应数据
+    3.响应结果
+    """
+    # 1.查询房屋全部信息
+    try:
+        house = House.query.get(house_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg='查询房屋数据失败')
+    if not house:
+        return jsonify(errno=RET.NODATA, errmsg='房屋不存在')
+
+    # 2.构造响应数据
+    response_data = house.to_full_dict()
+
+    # 获取user_id : 当用户登录后访问detail.html，就会有user_id，反之，没有user_id
+    login_user_id = session.get('user_id', -1)
+
+    # 3.响应结果
+    return jsonify(errno=RET.OK, errmsg='OK', data={'house': response_data, 'login_user_id': login_user_id})
+
+
 @api.route('/houses/image', methods=['POST'])
 @login_required
 def upload_house_image():
